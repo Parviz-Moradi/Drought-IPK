@@ -1,0 +1,55 @@
+# Load necessary libraries
+library(dplyr)
+library(car) # for ANOVA with type-III sums of squares
+
+# Load your data (replace 'your_data.csv' with the file name)
+data <- Dataset_drought_anova
+
+# Check the structure of your data
+str(data)
+
+# Load necessary library
+library(ggplot2)
+
+# Filter data to include only watered plants (control condition)
+control_data <- data %>%
+  filter(Treatment == "control")
+
+# Create the boxplot
+ggplot(control_data, aes(x = Genotype, y = Dryweight, fill = Genotype)) +
+  geom_boxplot(outlier.color = "red", outlier.shape = 16, outlier.size = 2) +
+  labs(
+    title = "Control Condition",
+    x = "Genotype",
+    y = "Shoot Dry weight (gr)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), # Rotate genotype labels for readability
+    legend.position = "none",                                      # Remove legend
+    panel.grid = element_blank(),                                   # Remove background grid
+    axis.line = element_line(color = "black"),                     # Add axis lines
+    panel.border = element_blank()                                 # Remove border around the plot
+  )
+############ stress###########
+# Filter data to include only watered plants (control condition)
+stress_data <- data %>%
+  filter(Treatment == "stress")
+
+# Create the boxplot
+ggplot(stress_data, aes(x = Genotype, y = Dryweight, fill = Genotype)) +
+  geom_boxplot(outlier.color = "red", outlier.shape = 16, outlier.size = 2) +
+  labs(
+    title = "Stress Condition",
+    x = "Genotype",
+    y = "Shoot Dry weight (gr)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), # Rotate genotype labels for readability
+    legend.position = "none",                                      # Remove legend
+    panel.grid = element_blank(),                                   # Remove background grid
+    axis.line = element_line(color = "black"),                     # Add axis lines
+    panel.border = element_blank()                                 # Remove border around the plot
+  )
+####################### difference#########
